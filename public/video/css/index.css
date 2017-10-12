@@ -21,9 +21,9 @@
     bottom: 0;
     left: 0;
     display: block;
-    width: calc(100% - 21px);
+    width: calc(100% - 7px);
     height: 30px;
-    margin: 3px 0px 3px 10px;
+    margin: 3px 0px 3px 4px;
     line-height: 30px;
     text-align: center;
     background-color: #3C3C3C;
@@ -33,7 +33,7 @@
 .imgList .info {
     position: absolute;
     top: 0;
-    right: 8px;
+    right: 1px;
     display: block;
     width: 33%;
     height: 30px;
