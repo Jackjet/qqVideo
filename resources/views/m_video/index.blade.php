@@ -9,28 +9,29 @@
                 @if($loop->index %2 == 0)
                     <div class="am-g shipin-group">
                         <div class="am-u-sm-6 am-text-center">
-                            <a href="{{route('video.info', $item->id)}}">
-                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                            </a>
-                            <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
-                        </div>
-                        @elseif($loop->index %2 == 1)
-                            <div class="am-u-sm-6 am-text-center">
+                            <div class="imgList">
                                 <a href="{{route('video.info', $item->id)}}">
                                     <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
                                          _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
                                 </a>
-                                <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
+                                <span class="title">{{$item->title}}</span>
+                                <span class="info">{{$item->total_num}} 集</span>
+                            </div>
+                        </div>
+                        @elseif($loop->index %2 == 1)
+                            <div class="am-u-sm-6 am-text-center">
+                                <div class="imgList">
+                                    <a href="{{route('video.info', $item->id)}}">
+                                        <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                             _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                                    </a>
+                                    <span class="title">{{$item->title}}</span>
+                                    <span class="info">{{$item->total_num}} 集</span>
+                                </div>
                             </div>
                     </div>
                 @endif
             @endforeach
-            {{--<div class="am-g">
-                <div class="am-u-sm-12">
-                    <script src='http://www.yezilm.com/vs.php?id=7622'></script>
-                </div>
-            </div>--}}
             <h4 class="title">
                 <span href="">电视剧</span>
                 <a href="{{route('video.category', 2)}}" class="am-fr">更多>></a>
@@ -39,28 +40,29 @@
                 @if($loop->index %2 == 0)
                     <div class="am-g shipin-group">
                         <div class="am-u-sm-6 am-text-center">
-                            <a href="{{route('video.info', $item->id)}}">
-                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                            </a>
-                            <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
-                        </div>
-                        @elseif($loop->index %2 == 1)
-                            <div class="am-u-sm-6 am-text-center">
+                            <div class="imgList">
                                 <a href="{{route('video.info', $item->id)}}">
                                     <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
                                          _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
                                 </a>
-                                <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
+                                <span class="title">{{$item->title}}</span>
+                                <span class="info">{{$item->total_num}} 集</span>
+                            </div>
+                        </div>
+                        @elseif($loop->index %2 == 1)
+                            <div class="am-u-sm-6 am-text-center">
+                                <div class="imgList">
+                                    <a href="{{route('video.info', $item->id)}}">
+                                        <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                             _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                                    </a>
+                                    <span class="title">{{$item->title}}</span>
+                                    <span class="info">{{$item->total_num}} 集</span>
+                                </div>
                             </div>
                     </div>
                 @endif
             @endforeach
-            {{--<div class="am-g">
-                <div class="am-u-sm-12">
-                    <script src='http://www.yezilm.com/vs.php?id=7622'></script>
-                </div>
-            </div>--}}
             <h4 class="title">
                 <span>动漫</span>
                 <a href="{{route('video.category', 3)}}" class="am-fr">更多>></a>
@@ -69,19 +71,25 @@
                 @if($loop->index %2 == 0)
                     <div class="am-g shipin-group">
                         <div class="am-u-sm-6 am-text-center">
-                            <a href="{{route('video.info', $item->id)}}">
-                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                            </a>
-                            <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
+                            <div class="imgList">
+                                <a href="{{route('video.info', $item->id)}}">
+                                    <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                         _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                                </a>
+                                <span class="title">{{$item->title}}</span>
+                                <span class="info">{{$item->total_num}} 集</span>
+                            </div>
                         </div>
                         @elseif($loop->index %2 == 1)
                             <div class="am-u-sm-6 am-text-center">
-                                <a href="{{route('video.info', $item->id)}}">
-                                    <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                         _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}"/>
-                                </a>
-                                <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
+                                <div class="imgList">
+                                    <a href="{{route('video.info', $item->id)}}">
+                                        <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                             _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                                    </a>
+                                    <span class="title">{{$item->title}}</span>
+                                    <span class="info">{{$item->total_num}} 集</span>
+                                </div>
                             </div>
                     </div>
                 @endif

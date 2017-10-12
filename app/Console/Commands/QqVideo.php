@@ -94,6 +94,7 @@ class QqVideo extends Command
                 'type_id' => $type['id'],
             ];
             $find = SpAlbum::where($data)->first();
+            $data['source_url'] = $map->attr('href');
             if(is_null($find)){
                 $info = SpAlbum::create($data);
                 if($info){

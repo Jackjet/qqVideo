@@ -9,38 +9,42 @@
                 @if($loop->index %4 == 0)
                     <div class="am-g">
                         <div class="am-u-sm-3 am-text-center">
-                            <a href="{{route('video.info', $item->id)}}">
-                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                            </a>
-                            <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
-                        </div>
-                        @elseif($loop->index %4 == 3)
-                            <div class="am-u-sm-3 am-text-center">
+                            <div class="imgList">
                                 <a href="{{route('video.info', $item->id)}}">
                                     <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
                                          _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
                                 </a>
-                                <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
+                                <span class="title">{{$item->title}}</span>
+                                <span class="info">{{$item->total_num}} 集</span>
+                            </div>
+                        </div>
+                        @elseif($loop->index %4 == 3)
+                            <div class="am-u-sm-3 am-text-center">
+                                <div class="imgList">
+                                    <a href="{{route('video.info', $item->id)}}">
+                                        <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                             _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                                    </a>
+                                    <span class="title">{{$item->title}}</span>
+                                    <span class="info">{{$item->total_num}} 集</span>
+                                </div>
                             </div>
                     </div>
                 @else
                     <div class="am-u-sm-3 am-text-center">
-                        <a href="{{route('video.info', $item->id)}}">
-                            <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                 _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                        </a>
-                        <a href="{{route('video.info', $item->id)}}" >{{$item->title}}</a>
+                        <div class="imgList">
+                            <a href="{{route('video.info', $item->id)}}">
+                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                            </a>
+                            <span class="title">{{$item->title}}</span>
+                            <span class="info">{{$item->total_num}} 集</span>
+                        </div>
                     </div>
                 @endif
             @endforeach
         </div>
     </div>
-    {{--<div class="am-g">
-        <div class="am-u-sm-12">
-            <script src="http://wm.lrswl.com/page/s.php?s=250702&w=950&h=90"></script>
-        </div>
-    </div>--}}
     <div class="am-panel am-panel-default">
         <div class="am-panel-hd">
             <span>电视剧</span>
@@ -51,38 +55,42 @@
                 @if($loop->index %4 == 0)
                     <div class="am-g">
                         <div class="am-u-sm-3 am-text-center">
-                            <a href="{{route('video.info', $item->id)}}">
-                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                            </a>
-                            <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
-                        </div>
-                @elseif($loop->index %4 == 3)
-                        <div class="am-u-sm-3 am-text-center">
+                            <div class="imgList">
                                 <a href="{{route('video.info', $item->id)}}">
                                     <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
                                          _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
                                 </a>
-                                <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
+                                <span class="title">{{$item->title}}</span>
+                                <span class="info">{{$item->total_num}} 集</span>
+                            </div>
+                        </div>
+                @elseif($loop->index %4 == 3)
+                        <div class="am-u-sm-3 am-text-center">
+                                <div class="imgList">
+                                    <a href="{{route('video.info', $item->id)}}">
+                                        <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                             _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                                    </a>
+                                    <span class="title">{{$item->title}}</span>
+                                    <span class="info">{{$item->total_num}} 集</span>
+                                </div>
                             </div>
                     </div>
                 @else
                     <div class="am-u-sm-3 am-text-center">
-                        <a href="{{route('video.info', $item->id)}}">
-                            <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                 _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                        </a>
-                        <a href="{{route('video.info', $item->id)}}" >{{$item->title}}</a>
+                        <div class="imgList">
+                            <a href="{{route('video.info', $item->id)}}">
+                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                            </a>
+                            <span class="title">{{$item->title}}</span>
+                            <span class="info">{{$item->total_num}} 集</span>
+                        </div>
                     </div>
                 @endif
             @endforeach
         </div>
     </div>
-    {{--<div class="am-g">
-        <div class="am-u-sm-12">
-            <script src="http://wm.lrswl.com/page/s.php?s=250702&w=950&h=90"></script>
-        </div>
-    </div>--}}
     <div class="am-panel am-panel-default">
         <div class="am-panel-hd">
             <span>动漫</span>
@@ -93,28 +101,37 @@
                 @if($loop->index %4 == 0)
                     <div class="am-g">
                         <div class="am-u-sm-3 am-text-center">
-                            <a href="{{route('video.info', $item->id)}}">
-                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                            </a>
-                            <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
-                        </div>
-                @elseif($loop->index %4 == 3)
-                        <div class="am-u-sm-3 am-text-center">
+                            <div class="imgList">
                                 <a href="{{route('video.info', $item->id)}}">
                                     <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
                                          _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
                                 </a>
-                                <a href="{{route('video.info', $item->id)}}">{{$item->title}}</a>
+                                <span class="title">{{$item->title}}</span>
+                                <span class="info">{{$item->total_num}} 集</span>
+                            </div>
+                        </div>
+                @elseif($loop->index %4 == 3)
+                        <div class="am-u-sm-3 am-text-center">
+                                <div class="imgList">
+                                    <a href="{{route('video.info', $item->id)}}">
+                                        <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                             _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                                    </a>
+                                    <span class="title">{{$item->title}}</span>
+                                    <span class="info">{{$item->total_num}} 集</span>
+                                </div>
                             </div>
                     </div>
                 @else
                     <div class="am-u-sm-3 am-text-center">
-                        <a href="{{route('video.info', $item->id)}}">
-                            <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
-                                 _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
-                        </a>
-                        <a href="{{route('video.info', $item->id)}}" >{{$item->title}}</a>
+                        <div class="imgList">
+                            <a href="{{route('video.info', $item->id)}}">
+                                <img src="{{asset('m_video')}}/img/videoLoading.gif" class="am-img-thumbnail"
+                                     _src="{{--{{route('video.getThumb', $item->id)}}--}}{{$item->nowThumb()}}" />
+                            </a>
+                            <span class="title">{{$item->title}}</span>
+                            <span class="info">{{$item->total_num}} 集</span>
+                        </div>
                     </div>
                 @endif
             @endforeach
