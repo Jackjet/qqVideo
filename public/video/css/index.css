@@ -14,15 +14,16 @@
 }
 .imgList img {
     height: 271px;
+    width: 192px;
 }
 .imgList .title {
     position: absolute;
     bottom: 0;
     left: 0;
     display: block;
-    width: calc(100% - 6px);
+    width: calc(100% - 21px);
     height: 30px;
-    margin: 3px;
+    margin: 3px 0px 3px 10px;
     line-height: 30px;
     text-align: center;
     background-color: #3C3C3C;
@@ -32,7 +33,7 @@
 .imgList .info {
     position: absolute;
     top: 0;
-    right: 0;
+    right: 8px;
     display: block;
     width: 33%;
     height: 30px;
