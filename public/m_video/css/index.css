@@ -38,6 +38,7 @@
 }
 .imgList img {
     height: 271px;
+    width: 100%;
 }
 .imgList .title {
     position: absolute;
