@@ -26,17 +26,4 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
-
-    /**
-     * 根据账号获取用户信息
-     * @param $name
-     * @return mixed
-     * author tingfeng <wuzunlin@foxmail.com>
-     * created time: 2017/9/5 10:29
-     */
-    public static function getByName($name)
-    {
-        $result = self::where('name', $name)->first();
-        return $result;
-    }
 }

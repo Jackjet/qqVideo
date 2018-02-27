@@ -11,7 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        \App\Models\SpVideoType::insert([
+        \App\Models\Type::insert([
             [
                 'name' => '电影',
             ],

@@ -2,8 +2,8 @@
 
 namespace App\Jobs;
 
-use App\Models\SpAlbum;
-use App\Models\SpVideo;
+use App\Models\Album;
+use App\Models\Video;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -40,28 +40,28 @@ class YoukuOne implements ShouldQueue
             self::dispatch($this->map);
             return false;
         }
-        $find = SpAlbum::find($this->map['id']);
+        $find = Album::find($this->map['id']);
         if(is_null($find)){
             return false;
         }
         $keywords = $dom->find('meta[name="keywords"]')->attr("content");
         $description = $dom->find('meta[name="description"]')->attr("content");
         $find->tags = $keywords;
-        $find->descript = SpAlbum::trimall($description);
+        $find->descript = Album::trimall($description);
         $find->save();
-        if($this->map['type_id'] == SpAlbum::TypeMovie){
+        if($this->map['type_id'] == Album::TypeMovie){
             $map = [
                 'source_url' => $this->map['source_url'],
                 'albums_id' => $find->id
             ];
-            $info = SpVideo::where($map)->first();
+            $info = Video::where($map)->first();
             if(is_null($info)){
-                SpVideo::create($map);
+                Video::create($map);
                 $find->total_num += 1;
                 $find->save();
                 Log::info("id:".$find->id.",total_num:".$find->total_num);
             }
-        }else if($this->map['type_id'] == SpAlbum::TypeTv){
+        }else if($this->map['type_id'] == Album::TypeTv){
             $listDom = $dom->find('div[name="tvlist"]');
             $count = $listDom->count();
             for($i = 1; $i <= $count; $i++){
@@ -75,16 +75,16 @@ class YoukuOne implements ShouldQueue
                         'title' => $map->find('a')->text(),
                         'albums_id' => $find->id
                     ];
-                    $info = SpVideo::where($map)->first();
+                    $info = Video::where($map)->first();
                     if(is_null($info)){
-                        SpVideo::create($map);
+                        Video::create($map);
                         $find->total_num += 1;
                         $find->save();
                         Log::info("id:".$find->id.",total_num:".$find->total_num);
                     }
                 }
             }
-        }else if($this->map['type_id'] == SpAlbum::TypeDm){
+        }else if($this->map['type_id'] == Album::TypeDm){
             $listDom = $dom->find('div.lists>div.items>li');
             $count = $listDom->count();
             for($i = 1; $i <= $count; $i++){
@@ -100,9 +100,9 @@ class YoukuOne implements ShouldQueue
                         'title' => $title,
                         'albums_id' => $find->id
                     ];
-                    $info = SpVideo::where($map)->first();
+                    $info = Video::where($map)->first();
                     if(is_null($info)){
-                        SpVideo::create($map);
+                        Video::create($map);
                         $find->total_num += 1;
                         $find->save();
                         Log::info("id:".$find->id.",total_num:".$find->total_num);

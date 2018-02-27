@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Models\SpAlbum;
+use App\Models\Album;
 use Illuminate\Console\Command;
 
 class NotCollectType extends Command
@@ -31,11 +31,11 @@ class NotCollectType extends Command
      */
     public function handle()
     {
-        $qqNotCollectCount = SpAlbum::where([
+        $qqNotCollectCount = Album::where([
             'total_num' => 0,
             'parse_type' => 'qq'
         ])->count('id');
-        $youkuNotCollectCount = SpAlbum::where([
+        $youkuNotCollectCount = Album::where([
             'total_num' => 0,
             'parse_type' => 'youku'
         ])->count('id');

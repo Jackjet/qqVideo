@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Jobs\QqVideoOne;
-use App\Models\SpAlbum;
-use App\Models\SpThumb;
+use App\Models\Album;
+use App\Models\Thumb;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Log;
@@ -49,7 +49,7 @@ class QqVideo extends Command
             echo "all finash\r\n";
             return false;
         }
-        $type = SpAlbum::getTypeQq($optionType);
+        $type = Album::getTypeQq($optionType);
         $url = 'http://v.qq.com/x/list/'.$type['type'].'?offset='.$optionOffset;
         try{
             $dom = \phpQuery::newDocumentFileHTML($url, 'utf-8');
@@ -79,12 +79,12 @@ class QqVideo extends Command
             $alt = $map->find('.figure_info')->text();
             $mark = $map->find('.mark_v>img')->attr('alt');
             if(strpos($mark, '预告片') !== false) continue;
-            $status = SpAlbum::StatusEd;
+            $status = Album::StatusEd;
             if(($type['id'] != 1)){
                 if(!preg_match('/^(全|更).+/', $alt, $match)) continue;
                 if(empty($match)) continue;
                 if(strpos($match[0], '更') !== false){
-                    $status = SpAlbum::StatusIng;
+                    $status = Album::StatusIng;
                 }
             }
             $data = [
@@ -93,21 +93,21 @@ class QqVideo extends Command
                 'parse_type' => 'qq',
                 'type_id' => $type['id'],
             ];
-            $find = SpAlbum::where($data)->first();
+            $find = Album::where($data)->first();
             $data['source_url'] = $map->attr('href');
             if(is_null($find)){
-                $info = SpAlbum::create($data);
+                $info = Album::create($data);
                 if($info){
                     $data['id'] = $info->id;
                     $data['status'] = $status;
                     dispatch(new QqVideoOne($data));
-                    SpThumb::create([
+                    Thumb::create([
                         'albums_id' => $info->id,
                         'thumb' => $map->find('img')->attr('r-lazyload')
                     ]);
                 }
             }else{
-                if($find->status == SpAlbum::StatusIng){
+                if($find->status == Album::StatusIng){
                     $data['id'] = $find->id;
                     dispatch(new QqVideoOne($data));
                     $find->status = $status;

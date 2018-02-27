@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use App\Jobs\QqVideoOne;
 use App\Jobs\YoukuOne;
-use App\Models\SpAlbum;
+use App\Models\Album;
 use Illuminate\Console\Command;
 
 class NotCollect extends Command
@@ -33,7 +33,7 @@ class NotCollect extends Command
      */
     public function handle()
     {
-        $data = SpAlbum::where('total_num', 0)->get();
+        $data = Album::where('total_num', 0)->get();
         foreach ($data as $item){
             $data = [
                 'title' => $item->title,

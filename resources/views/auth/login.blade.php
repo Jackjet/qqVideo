@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('layout.app')
 @section('header_script')
     <link rel="stylesheet" href="{{asset('admin')}}/css/login.css">
 @endsection

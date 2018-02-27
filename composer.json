@@ -7,15 +7,21 @@
     "require": {
         "php": ">=5.6.4",
         "coderockr/php-query": "dev-master",
+        "infrajs/doc": "^1.0",
         "jenssegers/agent": "^2.5",
-        "laravel/framework": "5.4.*",
+        "jonnyw/php-phantomjs": "4.*",
+        "laravel/framework": "5.5.*",
         "laravel/tinker": "~1.0",
-        "predis/predis": "~1.0"
+        "phpdocx/phpdocx": "^5.0",
+        "phpoffice/phpword": "^0.13.0",
+        "predis/predis": "~1.0",
+        "guzzlehttp/guzzle": "~6.0",
+        "mews/captcha": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
         "mockery/mockery": "0.9.*",
-        "phpunit/phpunit": "~5.7"
+        "phpunit/phpunit": "~6.0"
     },
     "autoload": {
         "classmap": [
@@ -39,16 +45,19 @@
         ],
         "post-install-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
+            "php artisan optimize",
+            "PhantomInstaller\\Installer::installPhantomJS"
         ],
         "post-update-cmd": [
             "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
+            "php artisan optimize",
+            "PhantomInstaller\\Installer::installPhantomJS"
         ]
     },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
-        "optimize-autoloader": true
+        "optimize-autoloader": true,
+        "bin-dir": "bin"
     }
 }
