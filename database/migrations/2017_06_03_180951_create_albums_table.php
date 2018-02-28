@@ -30,6 +30,7 @@ class CreateAlbumsTable extends Migration
             $table->integer('hit')->default(0)->comment("点击数");
             $table->float('grade')->default(9.9)->comment("分数");
             $table->integer('sort')->default(0)->comment("排序");
+            $table->integer('update_status')->default(1)->comment("状态：1正常2禁止");
             $table->integer('status')->default(1)->comment("状态：1连载中2完结3预告");
             $table->softDeletes();
             $table->timestamps();

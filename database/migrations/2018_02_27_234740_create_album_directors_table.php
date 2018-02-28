@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateAblumDirectorsTable extends Migration
+class CreateAlbumDirectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,6 +15,8 @@ class CreateAblumDirectorsTable extends Migration
     {
         Schema::create('album_directors', function (Blueprint $table) {
             $table->increments('id');
+            $table->string("name");
+            $table->integer('sort')->default(0)->comment("排序");
             $table->timestamps();
         });
     }

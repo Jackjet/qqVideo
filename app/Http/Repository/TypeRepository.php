@@ -13,9 +13,11 @@ use App\Models\Type;
 
 class TypeRepository extends BaseRepository
 {
-    const Type_Movie = 1;
-    const Type_Tv = 2;
-    const Type_Dm = 3;
+    public $parentId = null;
+    public $typeCode = null;
+    const Code_Video = "video";
+    const Code_Parse = "parse";
+    const Code_Article = "article";
 
     public function __construct(Type $model)
     {
@@ -33,8 +35,20 @@ class TypeRepository extends BaseRepository
         return $result->name;
     }
 
-    public function getVideoParentType()
+    /**
+     * 获取视频父级数据
+     * @return mixed
+     */
+    public function getType()
     {
-        
+        $result = $this->getModel()->where(function ($query){
+            if(!is_null($this->parentId)){
+                $query->where('parent_id', $this->parentId);
+            }
+            if(!is_null($this->typeCode)){
+                $query->where('type_code', $this->typeCode);
+            }
+        })->get();
+        return $result;
     }
 }

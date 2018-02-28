@@ -160,7 +160,6 @@
 <script type="text/javascript" src="{{asset('common')}}/layui/layui.js"></script>
 <script type="text/javascript" src="{{asset('common')}}/js/jquery-3.2.0.min.js"></script>
 <script type="text/javascript" src="{{asset('common')}}/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="{{asset('common')}}/jsplugin/jquery.leoweather.min.js"></script>
 <script type="text/javascript" src="{{asset('common')}}/jsplugin/echarts.min.js"></script>
 <!-- 引入当前页面js文件 -->
 <script type="text/javascript" src="{{asset('backstage')}}/js/common.js"></script>

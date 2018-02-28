@@ -18,7 +18,7 @@ class IndexController extends BaseController
 
     public function welcome()
     {
-        
+        return view('admin.index.welcome');
     }
 
     public function outLogin()

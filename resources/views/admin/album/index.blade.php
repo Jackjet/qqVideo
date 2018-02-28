@@ -1,121 +1,141 @@
-<div class="am-g">
-    <div class="am-u-sm-12 am-u-md-12 am-fr">
-        <form class="am-form-inline" id="searchForm">
-            <div class="am-form-group">
-                <input type="text" placeholder="标题" name="title" class="am-form-field am-radius"
-                       value="{{request()->input('title')}}">
-                <input type="text" placeholder="集数" name="total_num" class="am-form-field am-radius"
-                       value="{{request()->input('total_num')}}">
-                <select class="am-form-field" name="type_id">
-                    <option value="">所有类型</option>
-                    <option value="1" @if(request()->input('type_id') == 1) selected @endif>电影</option>
-                    <option value="2" @if(request()->input('type_id') == 2) selected @endif>电视</option>
-                    <option value="3" @if(request()->input('type_id') == 3) selected @endif>动漫</option>
-                </select>
-                <select class="am-form-field" name="parse_type">
-                    <option value="">全部来源</option>
-                    <option value="qq" @if(request()->input('parse_type') == 'qq') selected @endif>腾讯</option>
-                    <option value="youku" @if(request()->input('parse_type') == 'youku') selected @endif>优酷</option>
-                </select>
-                <select class="am-form-field" name="status">
-                    <option value="">所有状态</option>
-                    <option value="2" @if(request()->input('status') == '2') selected @endif>全集</option>
-                    <option value="1" @if(request()->input('status') == '1') selected @endif>更新中</option>
-                </select>
-                <button class="am-btn am-btn-primary">查询</button>
-                <a href="" id="searchHref"></a>
-            </div>
-        </form>
-    </div>
-</div>
-<div class="am-g">
-    <div class="am-u-sm-12 am-u-md-12">
-        <table class="am-table am-table-bordered am-text-center">
-            <thead>
-            <tr>
-                <th class="am-text-center">ID</th>
-                <th class="am-text-center">类型</th>
-                <th class="am-text-center">标题</th>
-                <th class="am-text-center">来源</th>
-                <th class="am-text-center">状态</th>
-                <th class="am-text-center">集数</th>
-                {{--<th class="am-text-center">缩略图</th>--}}
-                <th class="am-text-center">创建时间</th>
-                {{--<th class="am-text-center">更新时间</th>--}}
-                <th class="am-text-center">操作</th>
-            </tr>
-            </thead>
-            <tbody>
-            @foreach($data as $item)
-                <tr>
-                    <td>{{$item->id}}</td>
-                    <td>{{$item->nowType()}}</td>
-                    <td>{{$item->title}}</td>
-                    <td>{{$item->nowParseType()}}</td>
-                    <td>{{($item->status == 2)?'全集':'更新中'}}</td>
-                    <td>{{$item->total_num}}</td>
-                    {{--<td>
-                        <img src="{{$item->nowThumb()}}" class="am-img-thumbnail" style="width: 50px">
-                    </td>--}}
-                    <td>{{$item->created_at}}</td>
-                    {{--<td>{{$item->updated_at}}</td>--}}
-                    <td>
-                        <div class="am-btn-group">
-                            <a href="{{route('admin.Album.edit', $item->id)}}"
-                               class="am-btn am-btn-primary am-radius">编辑</a>
-                            <a href="{{route('admin.Album.queue', $item->id)}}" pjax="false"
-                               class="am-btn am-btn-success am-radius queue"
-                               data-am-loading="{spinner: 'circle-o-notch', loadingText: '添加中...', resetText: '已添加'}">任务</a>
-                            <a href="{{route('admin.Album.destroy', $item->id)}}" pjax="false"
-                               class="am-btn am-btn-danger am-radius delete"
-                               data-am-loading="{spinner: 'circle-o-notch', loadingText: '删除中...', resetText: '已成功'}">删除</a>
+@extends('layout.admin')
+@section("header")
+    <meta name="tableUrl" content="{{route('admin.album.submitQuery')}}">
+    <style>
+        .layui-table-cell  {
+            height: 100%;
+            max-width: 100%;
+        }
+    </style>
+@endsection
+@section('body')
+    <div class="larry-grid">
+        <div class="larry-personal">
+            <div class="layui-tab">
+                <blockquote class="layui-elem-quote mylog-info-tit">
+                    <form class="layui-form" action="{{route('admin.album.submitQuery')}}" id="query">
+                        <div class="layui-input-inline">
+                            <input type="text" name="title" placeholder="请输入标题" class="layui-input">
                         </div>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+                        <div class="layui-input-inline">
+                            <select name="typeId">
+                                <option value="">全部分类</option>
+                                @foreach($videoTypes as $videoType)
+                                    <option value="{{$videoType->id}}">{{$videoType->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="parseTypeId">
+                                <option value="">解析类型</option>
+                                @foreach($parseTypes as $parseType)
+                                    <option value="{{$parseType->id}}">{{$parseType->name}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="updateStatus">
+                                <option value="">全部更新状态</option>
+                                <option value="1">连载中</option>
+                                <option value="2">完结</option>
+                                <option value="3">预告</option>
+                            </select>
+                        </div>
+                        <div class="layui-input-inline">
+                            <select name="status">
+                                <option value="">全部状态</option>
+                                <option value="1">正常</option>
+                                <option value="2">禁用</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="layui-btn">查询</button>
+                    </form>
+                </blockquote>
+                <div class="larry-separate"></div>
+                <div class="layui-tab-content larry-personal-body clearfix mylog-info-box">
+                    <table class="layui-table " id="table" lay-filter="table"></table>
+                </div>
+            </div>
+        </div>
     </div>
-</div>
-<div class="am-g">
-    <div class="am-u-sm-12">
-        {{$data->links('admin.Layout.paginate', [
-        'query' => '&title='.request()->input('title').
-        '&type_id='.request()->input('type_id').'&parse_type='.request()->input('parse_type').
-        '&status='.request()->input('status').'&total_num='.request()->input('total_num')
-    ])}}
+@endsection
+@section("footer")
+    <div type="text/html" id="bartool" style="display: none">
+        <a class="layui-btn layui-btn-mini" lay-event="edit">编辑</a>
+        <a class="layui-btn layui-btn-danger layui-btn-mini" lay-event="del">删除</a>
     </div>
-</div>
-<script>
-    $(function(){
-        $('.queue').click(function(e){
-            e.preventDefault()
-            var self = this
-            $.ajax({
-                url: $(this).prop('href'),
-                type: 'get',
-                beforeSend: function(){
-                    $(self).button('loding');
-                },
-                success: function(res){
-                    $(self).button('reset');
+    <script>
+        laydate.render({
+            elem: "#range_at"
+            ,type: 'date'
+            ,range: '至'
+            ,format: 'yyyy-MM-dd'
+        });
+        layui.use(['jquery','layer', 'form', 'table'],function(){
+            window.jQuery = window.$ = layui.jquery;
+            window.layer = layui.layer;
+            var table = layui.table,
+                layer = layui.layer,
+                token = $('meta[name="csrf-token"]').attr('content'),
+                option = {
+                    elem: '#table'
+                    ,id: "table"
+                    ,skin: "row"
+                    ,page: true
+                    ,limit:10
+                    ,width: 'auto'
+                    ,url: $('meta[name="tableUrl"]').prop("content")
+                    ,method: "post"
+                    ,height: 'auto'
+                    ,where: {"_token": token}
+                    ,cols: [
+                        [
+                            /*{checkbox: true},*/
+                            {field: 'title', width:300, title: '标题'},
+                            {field: 'thumb', width:100, title: '缩略图'},
+                            {field: 'typeName', width:80, title: '分类'},
+                            {field: 'parseTypeName', width:100, title: '解析类型'},
+                            {field: 'hit', width:100, title: '点击数'},
+                            {field: 'sort', width:80, title: '排序'},
+                            {field: 'updateStatus', width:100, title: '更新状态'},
+                            {field: 'status', width:80, title: '状态'},
+                            {field: 'createdAt', width:180, title: '发布时间'},
+                            {field: 'updatedAt', width:180, title: '更新时间'},
+                            {width: 200, title: '操作', toolbar: '#bartool', align: 'center'},
+                        ],
+                    ]
+                };
+            table.render(option);
+            table.on('tool(table)', function(obj){
+                var data = obj.data;
+                var layEvent = obj.event;
+
+                if(layEvent === 'del'){ //删除
+                    layer.confirm('真的删除行么', function(index){
+                        obj.del();
+                        deleteDate(data.delUrl);
+                        layer.close(index);
+                    });
+                }else if(layEvent === 'edit'){
+                    layerIframe(data.editUrl);
                 }
-            })
-        })
-        $('.delete').click(function(e){
-            e.preventDefault()
-            var self = this
-            $.ajax({
-                url: $(this).prop('href'),
-                type: 'delete',
-                data: {"_token": "{{csrf_token()}}"},
-                beforeSend: function(){
-                    $(self).button('loding');
-                },
-                success: function(res){
-                    $(self).button('reset');
-                }
-            })
-        })
-    })
-</script>
+            });
+            /**
+             * 查询
+             */
+            $('#query').submit(function (e) {
+                e.preventDefault();
+                var map = $(this),
+                    where = {
+                        "_token": token,
+                        "title": map.find("input[name='title']").val(),
+                        "typeId": map.find("select[name='typeId']").val(),
+                        "updateStatus": map.find("select[name='updateStatus']").val(),
+                        "status": map.find("select[name='status']").val(),
+                    };
+                option.where = where;
+                table.reload("table", option)
+            });
+        });
+    </script>
+@endsection

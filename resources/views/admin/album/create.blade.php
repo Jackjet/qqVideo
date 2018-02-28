@@ -6,21 +6,21 @@
     <div class="larry-grid">
         <div class="larry-personal">
             <header class="larry-personal-tit">
-                <span>编辑</span>
+                <span>新增</span>
             </header>
             <div class="larry-personal-body clearfix changepwd">
-                <form class="layui-form col-lg-4 col-md-5 col-sm-6" action="{{route('admin.album.update', $info->id)}}">
+                <form class="layui-form col-lg-4 col-md-5 col-sm-6" action="{{route('admin.album.store')}}">
                     <div class="layui-form-item">
                         <label class="layui-form-label">标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="title" lay-verify="required" class="layui-input" value="{{$info->title}}"
+                            <input type="text" name="title" lay-verify="required" class="layui-input"
                                    placeholder="请输入标题">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">副标题</label>
                         <div class="layui-input-block">
-                            <input type="text" name="subTitle" lay-verify="required" class="layui-input" value="{{$info->sub_title}}"
+                            <input type="text" name="subTitle" lay-verify="required" class="layui-input"
                                    placeholder="请输入标题">
                         </div>
                     </div>
@@ -30,7 +30,7 @@
                             <select name="typeId" lay-verify="required">
                                 <option value=""></option>
                                 @foreach($videoTypes as $videoType)
-                                    <option value="{{$videoType->id}}" @if($info->type_id == $videoType->id) selected @endif>{{$videoType->name}}</option>
+                                    <option value="{{$videoType->id}}">{{$videoType->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -41,7 +41,7 @@
                             <select name="parseTypeId" lay-verify="required">
                                 <option value=""></option>
                                 @foreach($parseTypes as $parseType)
-                                    <option value="{{$parseType->id}}" @if($info->parse_type_id == $parseType->id) selected @endif>{{$parseType->name}}</option>
+                                    <option value="{{$parseType->id}}">{{$parseType->name}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -49,85 +49,84 @@
                     <div class="layui-form-item">
                         <label class="layui-form-label">缩略图</label>
                         <div class="layui-input-block">
-                            <input type="text" name="thumb" lay-verify="required" class="layui-input" value="{{$info->thumb}}"
+                            <input type="text" name="thumb" lay-verify="required" class="layui-input"
                                    placeholder="请输入缩略图地址">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">评分</label>
                         <div class="layui-input-block">
-                            <input type="text" name="grade" lay-verify="required" class="layui-input" value="{{$info->grade}}"
+                            <input type="text" name="grade" lay-verify="required" class="layui-input"
                                    placeholder="请输入评分">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">总集数</label>
                         <div class="layui-input-block">
-                            <input type="numeric" name="totalNum" lay-verify="required" class="layui-input" value="{{$info->total_num}}"
+                            <input type="numeric" name="totalNum" lay-verify="required" class="layui-input"
                                    placeholder="请输入总集数">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">年份</label>
                         <div class="layui-input-block">
-                            <input type="numeric" name="year" lay-verify="required" class="layui-input" value="{{$info->year}}"
+                            <input type="numeric" name="year" lay-verify="required" class="layui-input"
                                    placeholder="请输入年份">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">地区</label>
                         <div class="layui-input-block">
-                            <input type="text" name="aera" lay-verify="required" class="layui-input" value="{{$info->aera}}"
+                            <input type="text" name="aera" lay-verify="required" class="layui-input"
                                    placeholder="请输入地区">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">语言</label>
                         <div class="layui-input-block">
-                            <input type="text" name="language" lay-verify="required" class="layui-input" value="{{$info->language}}"
+                            <input type="text" name="language" lay-verify="required" class="layui-input"
                                    placeholder="请输入语言">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">描述</label>
                         <div class="layui-input-block">
-                            <textarea name="descript" required lay-verify="required" placeholder="请输入描述"
-                                      class="layui-textarea">{{$info->descript}}</textarea>
+                            <textarea name="descript" required lay-verify="required" placeholder="请输入描述" class="layui-textarea"></textarea>
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">更新时间信息</label>
                         <div class="layui-input-block">
                             <input type="text" name="updateTimeStr" lay-verify="required" class="layui-input"
-                                   placeholder="请输入更新时间信息" value="{{$info->update_time_str}}">
+                                   placeholder="请输入更新时间信息">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">备注</label>
                         <div class="layui-input-block">
                             <input type="text" name="remark" class="layui-input"
-                                   placeholder="请输入备注" value="{{$info->remark}}">
+                                   placeholder="请输入备注">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">排序</label>
                         <div class="layui-input-block">
-                            <input type="numeric" name="sort" lay-verify="required" class="layui-input" value="{{$info->sort}}">
+                            <input type="numeric" name="sort" lay-verify="required" class="layui-input" value="0">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">更新状态</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="updateStatus" value="1" title="连载中" @if($info->update_status == 1) checked @endif>
-                            <input type="radio" name="updateStatus" value="2" title="完结" @if($info->update_status == 2) checked @endif>
-                            <input type="radio" name="updateStatus" value="3" title="预告" @if($info->update_status == 3) checked @endif>
+                            <input type="radio" name="updateStatus" value="1" title="连载中" checked>
+                            <input type="radio" name="updateStatus" value="2" title="完结">
+                            <input type="radio" name="updateStatus" value="3" title="预告">
                         </div>
                     </div>
                     <div class="layui-form-item">
                         <label class="layui-form-label">状态</label>
                         <div class="layui-input-block">
-                            <input type="radio" name="status" value="1" title="正常" @if($info->status == 1) checked @endif>
-                            <input type="radio" name="status" value="2" title="禁止" @if($info->status == 2) checked @endif>
+                            <input type="radio" name="status" value="1" title="正常" checked>
+                            <input type="radio" name="status" value="2" title="禁止">
                         </div>
                     </div>
                     <div class="layui-form-item change-submit">
@@ -154,7 +153,7 @@
                     map = $(e.form);
                 $.ajax({
                     url: map.prop('action'),
-                    type: 'put',
+                    type: 'post',
                     data: map.serializeArray(),
                     headers:{
                         'X-CSRF-TOKEN': token

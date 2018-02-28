@@ -10,63 +10,144 @@ namespace App\Http\Repository;
 
 
 use App\Models\Album;
-use Illuminate\Support\Facades\DB;
 
 class AlbumRepository extends BaseRepository
 {
-    const StatusIng = 1;
-    const StatusEnd = 2;
+    public $id;
+    public $title;
+    public $subTitle;
+    public $typeId;
+    public $parseTypeId;
+    public $totalNum;
+    public $year;
+    public $aera;
+    public $language;
+    public $descript;
+    public $remark;
+    public $updateTimeStr;
+    public $hit;
+    public $grade;
+    public $sort;
+    public $updateStatus;
+    public $status;
 
-    const Qq_Type_Open = 2;
-    const Qq_Type_Vip = 7;
+    const Update_Status_Serial = 1;
+    const Update_Status_Finish = 2;
+    const Update_Status_Trailer = 3;
+
+    const Status_Yes = 1;
+    const Status_No = 2;
+
     public function __construct(Album $model)
     {
         parent::__construct($model);
     }
 
     /**
-     * 根据类型ID获取数据
-     * @param $id
-     * @param int $limit
+     * 创建数据
      * @return mixed
      */
-    public function getByTypeId($id, $limit = 10){
-        $result = $this->getModel()->where('type_id', $id)
-            ->limit($limit)->orderBy('id', 'desc')->get();
+    public function create()
+    {
+        $result = $this->getModel()->create([
+            'title' => $this->title,
+            'sub_title' => $this->subTitle,
+            'type_id' => $this->typeId,
+            'parse_type_id' => $this->parseTypeId,
+            'total_num' => $this->totalNum,
+            'year' => $this->year,
+            'aera' => $this->aera,
+            'language' => $this->language,
+            'descript' => $this->descript,
+            'remark' => $this->remark,
+            'update_time_str' => $this->updateTimeStr,
+            'hit' => 0,
+            'grade' => $this->grade,
+            'sort' => $this->sort,
+            'update_status' => $this->updateStatus,
+            'status' => $this->status,
+        ]);
         return $result;
     }
 
     /**
-     * 随机标题
+     * 获取数据
      * @return mixed
      */
-    public function getRandTitle()
+    public function getList()
     {
-        $randTitle = $this->getModel()->orderBy(DB::Raw('rand()'))
-            ->limit(1)->value('title');
-        return $randTitle;
+        $result = $this->getModel()->where(function ($query){
+            if(!is_null($this->title)){
+                $query->where('title', $this->title);
+            }
+            if(!is_null($this->typeId)){
+                $query->where('type_id', $this->typeId);
+            }
+            if(!is_null($this->parseTypeId)){
+                $query->where('parse_type_id', $this->parseTypeId);
+            }
+            if(!is_null($this->updateStatus)){
+                $query->where('update_status', $this->updateStatus);
+            }
+            if(!is_null($this->updateStatus)){
+                $query->where('update_status', $this->updateStatus);
+            }
+        })->orderBy('id', 'desc');
+        return $result;
     }
 
     /**
-     * 获取随机数据
-     * @param $limit 返回条数
+     * 查找数据
      * @return mixed
      */
-    public function getRandData($limit)
+    public function find()
     {
-        $randLimit = $this->getModel()->orderBy(DB::Raw('rand()'))
-            ->limit($limit)->get();
-        return $randLimit;
+        $result = $this->getModel()->where(function ($query){
+            if(!is_null($this->id)){
+                $query->where('id', $this->id);
+            }
+            if(!is_null($this->title)){
+                $query->where('title', $this->title);
+            }
+            if(!is_null($this->typeId)){
+                $query->where('type_id', $this->typeId);
+            }
+            if(!is_null($this->parseTypeId)){
+                $query->where('parse_type_id', $this->parseTypeId);
+            }
+            if(!is_null($this->updateStatus)){
+                $query->where('update_status', $this->updateStatus);
+            }
+            if(!is_null($this->updateStatus)){
+                $query->where('update_status', $this->updateStatus);
+            }
+        })->first();
+        return $result;
     }
 
     /**
-     * 删除空格
-     * @param $str 字符串
+     * 更新数据
      * @return mixed
      */
-    public function trimall($str){
-        $qian = array(" ","　","\t","\n","\r");
-        $hou = array("","","","","");
-        return str_replace($qian,$hou,$str);
+    public function save()
+    {
+        $album = $this->getModel()->find($this->id);
+        $album->title = $this->title;
+        $album->sub_title = $this->subTitle;
+        $album->type_id = $this->typeId;
+        $album->parse_type_id = $this->parseTypeId;
+        $album->total_num = $this->totalNum;
+        $album->year = $this->year;
+        $album->aera = $this->aera;
+        $album->language = $this->language;
+        $album->descript = $this->descript;
+        $album->remark = $this->remark;
+        $album->update_time_str = $this->updateTimeStr;
+        //$album->hit = $this->hit;
+        $album->grade = $this->grade;
+        $album->sort = $this->sort;
+        $album->update_status = $this->updateStatus;
+        $album->status = $this->status;
+        return $album->save();
     }
 }

@@ -4,10 +4,29 @@
 function alert(msg) {
     layer.alert(msg);
 }
+/**
+ * 手机提示
+ * @param msg
+ */
 function mobileAlert(msg) {
     layer.open({
         content: msg
         ,btn: '我知道了'
+    });
+}
+function deleteDate(url) {
+    $.ajax({
+        url: url,
+        type: 'delete',
+        headers:{
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        success: function(res){
+            layer.alert(res.message);
+        },
+        error: function(xhr){
+            layer.alert(tipOne(xhr.responseJSON.errors));
+        },
     });
 }
 var layerIframeIndex;
